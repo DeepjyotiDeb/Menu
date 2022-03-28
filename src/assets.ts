@@ -9,6 +9,7 @@ export const assets = [
     {name:"bgimg", url:"./backgroundng.png"},
     {name: "dino", url:"./Idle (1).png"},
     {name: "target", url:"./target.png"},
-    {name: "dinosheet", url:"./dinosheet.png"},
+    {name: "back", url:"./back.png"},
+    // {name: "dinosheet", url:"./dinosheet.png"},
     // {name: "dinojson", url:"./dinosheet.json"},
 ];

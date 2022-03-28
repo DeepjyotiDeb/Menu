@@ -13,6 +13,7 @@ export class GameScene extends Container implements IScene{
     private larg3: Sprite;
 
     private dino: Sprite;
+    private back: Sprite;
     constructor() {
         super();
         const dinoframe:Array<String> = [
@@ -24,7 +25,7 @@ export class GameScene extends Container implements IScene{
         const animatedClampy: AnimatedSprite = new AnimatedSprite(dinoframe.map((stringy:any) => Texture.from(stringy)));
         
         this.addChild(animatedClampy);
-        animatedClampy.animationSpeed = 0.13;
+        animatedClampy.animationSpeed = 0.09;
         animatedClampy.play();
         animatedClampy.onFrameChange = this.onClampyFrameChange.bind(this);
 
@@ -59,6 +60,9 @@ export class GameScene extends Container implements IScene{
         // this.addChild(this.clampy);
         // this.addChild(this.dino);
         
+        this.back = Sprite.from("back");
+        this.addChild(this.back)
+
         document.addEventListener("keydown", this.onKeyDown.bind(this));
         document.addEventListener("keyup", this.onKeyUp.bind(this));
 
@@ -66,7 +70,7 @@ export class GameScene extends Container implements IScene{
         // Loader.shared.add('dinojson', './dinosheet.json').load(this.setup.bind(this));
     }
     private onClampyFrameChange(currentFrame:any): void {
-        console.log(currentFrame)
+        // console.log(currentFrame)
     }
     // private setup(){
     //     const textures = [];
