@@ -38,7 +38,7 @@ export class LoaderScene extends Container implements IScene{
         this.loaderBar.addChild(this.loaderBarFill, this.loaderBarBorder);
         this.loaderBar.position.set((Manager.width - this.loaderBar.width)/2, (Manager.height - this.loaderBar.height)/2);
         this.addChild( this.splash, 
-            // this.loaderBar,
+            this.loaderBar,
               );
         
         Loader.shared.add(assets);

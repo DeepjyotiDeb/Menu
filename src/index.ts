@@ -25,4 +25,3 @@ Manager.initialize(640, 480, 0x6495ed);
 
 const loady: LoaderScene = new LoaderScene();
 Manager.changeScene(loady);
-console.log(Manager.width);

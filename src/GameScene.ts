@@ -1,3 +1,4 @@
+import TextInput, { InputOption } from "pixi-drawable-textinput";
 import { AnimatedSprite, Container, Loader, Sprite, Texture } from "pixi.js";
 import { IScene, Manager } from "./Manager";
 import { MenuScene } from "./MenuScene";
@@ -34,7 +35,7 @@ export class GameScene extends Container implements IScene{
         animatedDino.onFrameChange = this.onClampyFrameChange.bind(this);
 
         const defaultIcon = "url('target.png'), auto";
-        Manager.app.renderer.plugins.interaction.cursorStyles.default = defaultIcon;
+        // Manager.app.renderer.plugins.interaction.cursorStyles.default = defaultIcon;
            
         //loading the assets from where...?
         //it was laoded in loaderscene.ts, loaderscene calls managerscene.ts
@@ -72,6 +73,16 @@ export class GameScene extends Container implements IScene{
         this.back.on('pointertap', () => {
             Manager.changeScene(new MenuScene());
         })
+
+        let option = new InputOption();
+        option.multiLine = true;
+        option.style = { fontSize: 12 };
+        option.value = "A simple text input";
+        let input = new TextInput(option);
+        input.position.set(100, 200)
+        this.addChild(input);
+        console.log(option.value)
+
 
         document.addEventListener("keydown", this.onKeyDown.bind(this));
         document.addEventListener("keyup", this.onKeyUp.bind(this));
