@@ -1,5 +1,6 @@
 import { AnimatedSprite, Container, Loader, Sprite, Texture } from "pixi.js";
 import { IScene, Manager } from "./Manager";
+import { MenuScene } from "./MenuScene";
 
 
 export class GameScene extends Container implements IScene{
@@ -22,12 +23,15 @@ export class GameScene extends Container implements IScene{
             "Run (3).png",
             "Run (4).png",
         ]
-        const animatedClampy: AnimatedSprite = new AnimatedSprite(dinoframe.map((stringy:any) => Texture.from(stringy)));
+        const animatedDino: AnimatedSprite = new AnimatedSprite(dinoframe.map((stringy:any) => Texture.from(stringy)));
         
-        this.addChild(animatedClampy);
-        animatedClampy.animationSpeed = 0.09;
-        animatedClampy.play();
-        animatedClampy.onFrameChange = this.onClampyFrameChange.bind(this);
+        animatedDino.position.set(100,300)
+        animatedDino.width=130;
+        animatedDino.height = 100;
+        this.addChild(animatedDino);
+        animatedDino.animationSpeed = 0.09;
+        animatedDino.play();
+        animatedDino.onFrameChange = this.onClampyFrameChange.bind(this);
 
         const defaultIcon = "url('target.png'), auto";
         Manager.app.renderer.plugins.interaction.cursorStyles.default = defaultIcon;
@@ -61,7 +65,13 @@ export class GameScene extends Container implements IScene{
         // this.addChild(this.dino);
         
         this.back = Sprite.from("back");
+        this.back.interactive = true;
+        this.back.buttonMode = true;
         this.addChild(this.back)
+
+        this.back.on('pointertap', () => {
+            Manager.changeScene(new MenuScene());
+        })
 
         document.addEventListener("keydown", this.onKeyDown.bind(this));
         document.addEventListener("keyup", this.onKeyUp.bind(this));
