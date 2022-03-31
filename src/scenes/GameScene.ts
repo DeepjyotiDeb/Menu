@@ -10,29 +10,34 @@ export class GameScene extends Container implements IScene{
     private clampyVelocity: number;
     private dragVelocity: number;
 
-    private larg1: Sprite;
-    private larg2: Sprite;
-    private larg3: Sprite;
-
     private dino: Sprite;
+    private animatedDino: AnimatedSprite;
     private back: Sprite;
+
+    private pauseUp: Texture;
+    private pauseDown: Texture;
+    private pauseButton: Sprite;
+
+    private isdown: Boolean;
+
     constructor() {
         super();
+        this.isdown = false;
         const dinoframe:Array<String> = [
             "Run (1).png",
             "Run (2).png",
             "Run (3).png",
             "Run (4).png",
         ]
-        const animatedDino: AnimatedSprite = new AnimatedSprite(dinoframe.map((stringy:any) => Texture.from(stringy)));
+        this.animatedDino = new AnimatedSprite(dinoframe.map((stringy:any) => Texture.from(stringy)));
         
-        animatedDino.position.set(100,300)
-        animatedDino.width=130;
-        animatedDino.height = 100;
-        this.addChild(animatedDino);
-        animatedDino.animationSpeed = 0.09;
-        animatedDino.play();
-        animatedDino.onFrameChange = this.onClampyFrameChange.bind(this);
+        this.animatedDino.position.set(100,300)
+        this.animatedDino.width=130;
+        this.animatedDino.height = 100;
+        this.addChild(this.animatedDino);
+        this.animatedDino.animationSpeed = 0.09;
+        this.animatedDino.play();
+        this.animatedDino.onFrameChange = this.onClampyFrameChange.bind(this);
 
         const defaultIcon = "url('target.png'), auto";
         // Manager.app.renderer.plugins.interaction.cursorStyles.default = defaultIcon;
@@ -58,9 +63,6 @@ export class GameScene extends Container implements IScene{
 
         this.dragVelocity = 7;
 
-        this.larg1 = Sprite.from("larg1")
-        this.larg2 = Sprite.from("larg2")
-        this.larg3 = Sprite.from("larg3")
         // this.addChild(this.larg1, this.larg2, this.larg3);
         // this.addChild(this.clampy);
         // this.addChild(this.dino);
@@ -69,7 +71,23 @@ export class GameScene extends Container implements IScene{
         this.back.interactive = true;
         this.back.buttonMode = true;
         this.addChild(this.back)
+        
+        this.pauseUp = Texture.from("pauseUp");
+        this.pauseDown = Texture.from("pauseDown");
 
+        this.pauseButton = new Sprite(this.pauseUp);
+        this.pauseButton.anchor.set(0.5)
+        this.pauseButton.position.set(600, 50);
+        this.pauseButton.width=40;
+        this.pauseButton.height=40;
+        this.pauseButton
+        .on('pointertap', this.onButtonDown.bind(this))
+        // .on('pointerup', this.onButtonUp.bind(this));
+        this.addChild(this.pauseButton);
+        
+        this.pauseButton.interactive = true;
+        this.pauseButton.buttonMode = true;
+        
         this.back.on('pointertap', () => {
             Manager.changeScene(new MenuScene());
         })
@@ -88,11 +106,28 @@ export class GameScene extends Container implements IScene{
         document.addEventListener("keyup", this.onKeyUp.bind(this));
 
         
-        // Loader.shared.add('dinojson', './dinosheet.json').load(this.setup.bind(this));
     }
     private onClampyFrameChange(currentFrame:any): void {
         // console.log(currentFrame)
     }
+    private onButtonDown(){
+        this.isdown = !this.isdown;
+        if (this.isdown){
+            this.pauseButton.texture = this.pauseDown;
+            this.animatedDino.stop();
+        } else {
+            this.pauseButton.texture = this.pauseUp;
+            this.animatedDino.play();
+        }
+    }
+    // private onButtonUp(): void{
+    //     if(this.isdown==false){
+    //         this.pauseButton.texture = this.pauseUp;
+    //         this.alpha = 1;
+    //         this.isdown = true;
+    //         console.log(this.pauseButton.texture);
+    //     }
+    // }
     // private setup(){
     //     const textures = [];
     //     for(let i=1; i<9; i++) {
@@ -144,7 +179,6 @@ export class GameScene extends Container implements IScene{
         // console.log(e)
         
     }
-
 
     public update(framesPassed: number): void {
         this.clampy.x = this.clampy.x + this.clampyVelocity* framesPassed;

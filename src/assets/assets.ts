@@ -10,6 +10,8 @@ export const assets = [
     {name: "dino", url:"./Idle (1).png"},
     {name: "target", url:"./target.png"},
     {name: "back", url:"./back.png"},
+    {name: "pauseDown", url:"./pauseDown.png"},
+    {name: "pauseUp", url:"./pauseUp.png"},
     // {name: "dinosheet", url:"./dinosheet.png"},
     // {name: "dinojson", url:"./dinosheet.json"},
 ];

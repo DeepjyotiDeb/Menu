@@ -55,10 +55,10 @@ export class LoaderScene extends Container implements IScene{
         // console.log(progressRatio)
     }
     private gameLoaded(): void {
-        var delayInMilliseconds = 1000; //1 second
+        const delayInMilliseconds = 50; //1 second
 
         setTimeout(function() {
-            Manager.changeScene(new MenuScene());
+            Manager.changeScene(new GameScene());
         //your code to be executed after 1 second
         }, delayInMilliseconds);
     }
