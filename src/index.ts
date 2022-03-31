@@ -1,7 +1,7 @@
 // import { Application, Sprite } from 'pixi.js'
 
-import { LoaderScene } from "./LoaderScene";
-import { Manager } from "./Manager";
+import { LoaderScene } from "./scenes/LoaderScene";
+import { Manager } from "./manager/Manager";
 
 // const app = new Application({
 // 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,

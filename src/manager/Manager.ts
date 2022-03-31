@@ -76,7 +76,8 @@ private constructor() {/*purely static will not have constructor*/}
                 Manager.currentScene.destroy();
             }
             //adding the new one
-            //where are we even getting the new scene?!@#!!!
+            //these are functions. current scene gets replaced with the name we used 
+            //for our scenes
             Manager.currentScene = newScene;
             Manager.app.stage.addChild(Manager.currentScene)
         }

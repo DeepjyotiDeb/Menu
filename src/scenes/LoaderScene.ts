@@ -1,7 +1,7 @@
 import { Container, Graphics, Loader, Sprite } from "pixi.js";
-import { assets } from "./assets";
+import { assets } from "./../assets/assets";
 import { GameScene } from "./GameScene";
-import { IScene, Manager } from "./Manager";
+import { IScene, Manager } from "./../manager/Manager";
 import { MenuScene } from "./MenuScene";
 
 export class LoaderScene extends Container implements IScene{

@@ -1,6 +1,6 @@
 import TextInput, { InputOption } from "pixi-drawable-textinput";
 import { AnimatedSprite, Container, Loader, Sprite, Texture } from "pixi.js";
-import { IScene, Manager } from "./Manager";
+import { IScene, Manager } from "./../manager/Manager";
 import { MenuScene } from "./MenuScene";
 
 
