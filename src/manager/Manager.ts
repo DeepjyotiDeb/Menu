@@ -81,6 +81,14 @@ private constructor() {/*purely static will not have constructor*/}
             Manager.currentScene = newScene;
             Manager.app.stage.addChild(Manager.currentScene)
         }
+        public static changeSubScene(newScene: IScene): void {
+            Manager.currentScene = newScene;
+            Manager.app.stage.addChild(Manager.currentScene)
+        }
+        public static dropSubScene(): void {
+            Manager.app.stage.removeChild(Manager.currentScene);
+            Manager.currentScene.destroy();
+        }
         //the update method
         private static update(framesPassed:number): void{
             //let the current scene know we updated it??

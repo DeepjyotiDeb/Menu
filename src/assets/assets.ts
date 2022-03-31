@@ -2,9 +2,6 @@ export const assets = [
     {name:"clamper", url:"./clampy.png"},
     {name:"dragonite", url:"./dragonite.png"},
     {name:"clampersvg", url:"./clampy.svg"},
-    {name:"larg1", url:"./larg1.png"},
-    {name:"larg2", url:"./larg2.png"},
-    {name:"larg3", url:"./larg3.png"},
     {name:"startgame", url:"./sgame.png"},
     {name:"bgimg", url:"./backgroundng.png"},
     {name: "dino", url:"./Idle (1).png"},
@@ -12,6 +9,8 @@ export const assets = [
     {name: "back", url:"./back.png"},
     {name: "pauseDown", url:"./pauseDown.png"},
     {name: "pauseUp", url:"./pauseUp.png"},
+    {name: "tempscreen", url:"./temp.png"},
+    {name: "sendButton", url:"./send.png"},
     // {name: "dinosheet", url:"./dinosheet.png"},
     // {name: "dinojson", url:"./dinosheet.json"},
 ];

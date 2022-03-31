@@ -2,6 +2,7 @@ import TextInput, { InputOption } from "pixi-drawable-textinput";
 import { AnimatedSprite, Container, Loader, Sprite, Texture } from "pixi.js";
 import { IScene, Manager } from "./../manager/Manager";
 import { MenuScene } from "./MenuScene";
+import { PauseMenu } from "./subscene/PauseMenu";
 
 
 export class GameScene extends Container implements IScene{
@@ -19,6 +20,7 @@ export class GameScene extends Container implements IScene{
     private pauseButton: Sprite;
 
     private isdown: Boolean;
+    private sendButton: Sprite;
 
     constructor() {
         super();
@@ -81,7 +83,7 @@ export class GameScene extends Container implements IScene{
         this.pauseButton.width=40;
         this.pauseButton.height=40;
         this.pauseButton
-        .on('pointertap', this.onButtonDown.bind(this))
+            .on('pointertap', this.onButtonDown.bind(this))
         // .on('pointerup', this.onButtonUp.bind(this));
         this.addChild(this.pauseButton);
         
@@ -89,7 +91,7 @@ export class GameScene extends Container implements IScene{
         this.pauseButton.buttonMode = true;
         
         this.back.on('pointertap', () => {
-            Manager.changeScene(new MenuScene());
+            Manager.changeScene(new PauseMenu());
         })
 
         let option = new InputOption();
@@ -101,11 +103,22 @@ export class GameScene extends Container implements IScene{
         this.addChild(input);
         console.log(option.value)
 
+        this.sendButton = Sprite.from("sendButton");
+        this.sendButton.anchor.set(0.5);
+        this.sendButton.scale.set(0.4, 0.4);
+        this.sendButton.position.set(250,212);
+        this.addChild(this.sendButton);
+
+        this.sendButton.interactive = true;
+        this.sendButton.buttonMode = true;
+
+        this.sendButton.on("pointertap", () => {
+            console.log(option.value);
+        })
 
         document.addEventListener("keydown", this.onKeyDown.bind(this));
         document.addEventListener("keyup", this.onKeyUp.bind(this));
 
-        
     }
     private onClampyFrameChange(currentFrame:any): void {
         // console.log(currentFrame)
@@ -115,8 +128,10 @@ export class GameScene extends Container implements IScene{
         if (this.isdown){
             this.pauseButton.texture = this.pauseDown;
             this.animatedDino.stop();
+            Manager.changeSubScene(new PauseMenu())
         } else {
             this.pauseButton.texture = this.pauseUp;
+            Manager.dropSubScene();
             this.animatedDino.play();
         }
     }
